@@ -16,7 +16,7 @@
                     <label>Date *</label>
                 </td>
                 <td>
-                    <input type="date" name="startdate" required="required"/>
+                    <input type="date" id="date" name="startdate" value="1991-03-15" required="required">
                 </td>
                 <td>
                     <label>Start Time (24-hr) *</label>
@@ -56,6 +56,10 @@
         <hr/>
     </form>
     <br />
+
+    <script type="text/javascript">
+      document.getElementById("date").valueAsDate = new Date();
+    </script>
 
     {% if is_hidden == False %}
     <div class="searchresults">
