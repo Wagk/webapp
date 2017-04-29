@@ -1,3 +1,4 @@
+
 <html>
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
@@ -22,20 +23,20 @@
                     <label>Start Time (24-hr) *</label>
                 </td>
                 <td>
-                    <input type="number" name="starthour" maxlength="2" min="0" max="23" required="required">:
-                    <input type="number" name="startmin" maxlength="2" min="0" max="59" required="required">
+                    <input type="number" name="starthour" maxlength="2" min="0" max="23" value="00" required="required">:
+                    <input type="number" name="startmin" maxlength="2" min="0" max="59" value="00" required="required">
                 </td>
                 <td>
                     <label>End Time (24-hr) *</label>
                 </td>
                 <td>
-                    <input name="endhour" type="number" maxlength="2" min="0" max="23" required="required">:
-                    <input name="endmin" type="number" maxlength="2" min="0" max="59" required="required">
+                    <input name="endhour" type="number" maxlength="2" min="0" max="23" value="00" required="required">:
+                    <input name="endmin" type="number" maxlength="2" min="0" max="59" value="00" required="required">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label>Special Needs</label>
+                    <label>Child's health condition</label>
                 </td>
                 <td colspan="5">
                     <select name="skills" multiple="multiple" style="width: 450px;" required="required">
