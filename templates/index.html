@@ -39,10 +39,9 @@
                 </td>
                 <td colspan="5">
                     <select name="skills" multiple="multiple" style="width: 450px;" required="required">
-                        <option value="1">Autism Friendly</option>
-                        <option value="2">Disability Friendly</option>
-                        <option value="3">Asthmatic Friendly</option>
-                        <option value="4">Change to whatever that is suitable</option>
+                      {% for skill in skill_list %}
+                      <option value="{{skill}}">{{skill}}</option>
+                      {% endfor %}
                     </select>
                 </td>
             </tr>
