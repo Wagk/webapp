@@ -31,45 +31,63 @@ def index():
     return render_template('index.html',
                            title='this is a title',
                            dest='/search',
-                           is_hidden=True
+                           is_hidden="true"
     )
 
 @app.route('/search')
 def display_results():
 
-    local_database = database
-
     print(request.args.items())
 
-    for key, value in request.args.items():
-        if key == 'gender':
-            local_database = [i for i in local_database if i['gender'] == value]
-        elif key == 'skills':
-            local_database = [i for i in local_database if i['skills'] == value]
-            pass
-        elif key == 'startdate':
-            local_database = [i for i in local_database if i['startdate'] == value]
-        elif key == 'starthour':
-            local_database = [i for i in local_database if i['starthour'] == value]
-        elif key == 'startmin':
-            local_database = [i for i in local_database if i['startmin'] == value]
-        elif key == 'enddate':
-            local_database = [i for i in local_database if i['enddate'] == value]
-        elif key == 'endhour':
-            local_database = [i for i in local_database if i['endhour'] == value]
-        elif key == 'endmin':
-            local_database = [i for i in local_database if i['endmin'] == value]
-        pass
+    # grab presentable stuff from database
+    def format(entry):
+        return {x : y for x, y in entry if x in [
+            'name', 'gender', 'description', 'price', 'skills'
+        ]}
 
-    # TODO(pangt): format and submit data
+    def correct_skills(entry):
+        print(request.args.get('skills'))
+        for skill in request.args.get('skills'):
+            if skill not in entry['skills']:
+                return False
+        return True
 
+    def correct_gender(entry):
+        return entry['gender'] == request.args.get['gender']
+
+    def correct_day(entry):
+        req_date = datetime.strptime(request.args.get('startdate'), '%Y-%m-%d')
+        avail_day = int(req_date.strftime('%w'))
+        return entry['day'][avail_day] == True
+
+    def correct_hours(entry):
+        req_start_24hr = datetime.strptime('{}{}'.format(request.args.get('starthour'),
+                                                         request.args.get('startmin')),
+                                           '%H%M')
+        req_end_24hr = datetime.strptime('{}{}'.format(request.args.get('endhour'),
+                                                       request.args.get('endmin')),
+                                         '%H%M')
+
+        if req_end_24hr < req_start_24hr:
+            req_end_24hr, req_start_24hr = req_start_24hr, req_end_24hr
+
+        care_start_24hr = datetime.strptime(entry['start'], '%H%M')
+        care_end_ = datetime.strptime(entry['end'], '%H%M')
+
+        return care_start < req_start_24hr and req_end_24hr < care_end
+
+    local_database = [i for i in database if
+                      correct_skills(i) and
+                      correct_gender(i) and
+                      correct_day(i) and
+                      correct_hours(i)]
 
     return render_template('index.html',
-                           result=local_database,
+                           # result=local_database,
+                           result=[format(i) for i in local_database],
                            title='Search Results',
                            dest='/search',
-                           is_hidden=False
-    )
+                           is_hidden="false")
 
 @app.route('/caregiver/<hash>')
 def display_caregiver(hash):

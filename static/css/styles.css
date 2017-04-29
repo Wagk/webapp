@@ -21,7 +21,7 @@ p {
 
 input[type=number] {
     width: 40px;
-} 
+}
 
 table {
     align-content: center;
@@ -40,4 +40,5 @@ tr, td {
 
 .searchresults {
     text-align:center;
+    background-color:gold;
 }
