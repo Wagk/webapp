@@ -1,36 +1,36 @@
 body {
     background-color: powderblue;
-    background-image: url("../images/background2.jpg");
+    background-image: url("../images/background.jpg");
     background-repeat: no-repeat;
     background-position: right top;
     background-attachment: fixed;
-    font-family: 12px arial, verdana;
+    font-family: Calibri, Georgia, Serif;
 }
 
 p {
-    font-family: 12px arial, verdana;
-    color: red;
+    font-family: Calibri, Georgia, Serif;
 }
 
 h1 {
     color: blue;
 }
 
+p {
+    color: red;
+}
+
 input[type=number] {
     width: 40px;
 } 
 
-label, select {
-    font: bold 12px arial, verdana;
-}
-
 table {
     align-content: center;
+    border: solid;
     width: 55%;
 }
 
 tr, td {
-    border: thin;
+    border: solid;
     padding: 5px;
 }
 
@@ -39,21 +39,5 @@ tr, td {
 }
 
 .searchresults {
-    align-content: center;
-    text-align: center;
-}
-
-.searchresults_table {
-    font: bold 12px arial, verdana;
-    align-content: center;
-    border: groove;
-    width: 80%;
-}
-
-.searchresults_table tr:nth-child(odd) {
-    background-color: #dfdfff;
-}
-
-.searchresults_table tr:nth-child(even) {
-    background-color: #fafaff;
+    text-align:center;
 }
