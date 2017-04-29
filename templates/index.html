@@ -1,78 +1,78 @@
 <html>
 <head>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <title>{{ title }}</title>
 </head>
 <body>
     <h1>Search</h1>
-    <table>
+    <form action="{{dest}}" name="query" method="GET">
+      <table>
         <tr>
-            <td>
-                Gender
-            </td>
-            <td>
-                <select>
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                </select>
-            </td>
+          <td>
+            Gender
+          </td>
+          <td>
+            <select >
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+            </select>
+          </td>
         </tr>
         <tr>
-            <td>
-                Age
-            </td>
-            <td>
-                <input type="number" name="age" maxlength="2"><br>
-            </td>
+          <td>
+            Age
+          </td>
+          <td>
+            <input type="number" name="age" maxlength="2"><br>
+          </td>
         </tr>
         <tr>
-            <td>
-                Skills  (Hold down the Ctrl (windows))
-            </td>
-            <td>
-                <select name="skills" multiple>
-                    <option value="1">Autism Friendly</option>
-                    <option value="2">Disability Friendly</option>
-                    <option value="3">Asthmatic Friendly</option>
-                    <option value="4">Change to whatever that is suitable</option>
-                </select>
-            </td>
+          <td>
+            Skills  (Hold down the Ctrl (windows))
+          </td>
+          <td>
+            <select  name="skills" multiple>
+              <option value="1">Autism Friendly</option>
+              <option value="2">Disability Friendly</option>
+              <option value="3">Asthmatic Friendly</option>
+              <option value="4">Change to whatever that is suitable</option>
+            </select>
+          </td>
         </tr>
         <tr>
-            <td>
-                Start Date
-            </td>
-            <td>
-                <input type="date" name="startdate" />
-            </td>
+          <td>
+            Start Date
+          </td>
+          <td>
+            <input type="date" name="startdate" />
+          </td>
         </tr>
         <tr>
-            <td>
-                Start Time
-            </td>
-            <td>
-                <input type="number" name="starthour" maxlength="2">:<input type="number" name="startmin" maxlength="2"><br>
-            </td>
+          <td>
+            Start Time
+          </td>
+          <td>
+            <input type="number" name="starthour" maxlength="2">:<input type="number" name="startmin" maxlength="2"><br>
+          </td>
         </tr>
         <tr>
-            <td>
-                End Date
-            </td>
-            <td>
-                <input type="date" name="enddate" />
-            </td>
+          <td>
+            End Date
+          </td>
+          <td>
+            <input type="date" name="enddate" />
+          </td>
         </tr>
         <tr>
-            <td>
-                End Time
-            </td>
-            <td>
-                <input type="number" name="endhour" maxlength="2">:<input type="number" name="endmin" maxlength="2"><br>
-            </td>
+          <td>
+            End Time
+          </td>
+          <td>
+            <input type="number" name="endhour" maxlength="2">:<input type="number" name="endmin" maxlength="2"><br>
+          </td>
         </tr>
-    </table>
-
-    <input type="submit" value="Search">
-
+      </table>
+      <input type="submit" value="Search">
+    </form>
 </body>
 </html>

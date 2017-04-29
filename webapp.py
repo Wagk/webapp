@@ -9,9 +9,7 @@ import os
 """
 
 app = Flask(__name__)
-
-flask.secret_key = os.urandom(24)
-
+app.secret_key = os.urandom(24)
 database = None
 
 @app.route('/')
@@ -22,17 +20,24 @@ def index():
     if 'last_query' in request.cookies:
         query = request.cookies['last_query']
 
+        print(query)
+
         redirect(url_for('/search', **query))
         pass
 
     return render_template('index.html',
-                           title='this is a title')
+                           title='this is a title',
+                           dest='/search'
+    )
 
 @app.route('/search')
 def display_results():
     query = request.args
 
+
+
     # TODO(pangt): Search and accumulate data
+    print(query)
 
     return render_template('search.html')
 
