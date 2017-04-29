@@ -11,8 +11,8 @@
     <form action="{{dest}}" name="query" method="GET">
         <table align="center">
             <tr>
-                <td>
-                    Start Date
+                <td width="20%">
+                    Date
                 </td>
                 <td>
                     <input type="date" name="startdate" />
@@ -23,15 +23,19 @@
                 </td>
                 <td>
                     <input type="number" name="starthour" maxlength="2" min="0" max="23">:
-                    <input type="number" name="startmin" maxlength="2" min="0" max="59"><br>
+                    <input type="number" name="startmin" maxlength="2" min="0" max="59">
                 </td>
-
+                <td>End Time (24-hr)</td>
+                <td>
+                  <input name="endhour" type="number" maxlength="2" min="0" max="23">:
+                  <input name="endmin" type="number" maxlength="2" min="0" max="59">
+                </td>
             </tr>
             <tr>
-                <td width="40%">
+                <td>
                     Special Needs
                 </td>
-                <td colspan="3">
+                <td colspan="5">
                     <select name="skills" multiple="multiple" style="width: 450px;">
                         <option value="1">Autism Friendly</option>
                         <option value="2">Disability Friendly</option>
@@ -41,10 +45,10 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="4"><input type="checkbox" name="meal" />Meal Inclusive</td>
+                <td colspan="6"><input type="checkbox" name="meal" />Meal Inclusive</td>
             </tr>
             <tr>
-                <td colspan="4"><input type="checkbox" name="pickup" />Pick Up</td>
+                <td colspan="6"><input type="checkbox" name="pickup" />Pick Up</td>
             </tr>
 
         </table>
@@ -52,7 +56,7 @@
         <div align="center"><input type="submit" align="center" value="Search"></div>
     </form>
     <br />
-    <div class="searchresults" hidden="true">
+    <div class="searchresults" hidden="{{is_hidden}}">
       {% for item in result %}
       <pre>{{item}}</pre>
       {% endfor %}

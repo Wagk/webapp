@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, session, redirect
 import json
 import os
 import copy
+import datetime
 
 """
 - Display search queries if user already has preferences saved
@@ -29,7 +30,8 @@ def index():
 
     return render_template('index.html',
                            title='this is a title',
-                           dest='/search'
+                           dest='/search',
+                           is_hidden=True
     )
 
 @app.route('/search')
@@ -65,7 +67,8 @@ def display_results():
     return render_template('index.html',
                            result=local_database,
                            title='Search Results',
-                           dest='/search'
+                           dest='/search',
+                           is_hidden=False
     )
 
 @app.route('/caregiver/<hash>')
