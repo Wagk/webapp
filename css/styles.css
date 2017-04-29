@@ -1,5 +1,13 @@
 body {
     background-color: powderblue;
+    background-image: url("../images/background.jpg");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+}
+
+p {
+    font-family: "Times New Roman", Georgia, Serif;
 }
 
 h1 {
@@ -15,9 +23,16 @@ input[type=number] {
 } 
 
 table {
+    align-content: center;
     border: solid;
+    width: 55%;
 }
 
 tr, td {
     border: solid;
+    padding: 5px;
+}
+
+.searchresults {
+    text-align:center;
 }
