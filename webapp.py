@@ -31,10 +31,13 @@ def index():
         redirect(url_for('/search', **query))
         pass
 
+    print(skill_list)
+
     return render_template('index.html',
                            title='this is a title',
+                           skill_list=skill_list,
                            dest='/search',
-                           is_hidden="true"
+                           is_hidden=True
     )
 
 @app.route('/search')
@@ -50,7 +53,7 @@ def display_results():
 
     def correct_skills(entry):
         for skill in request.args.getlist('skills'):
-            if skill_list[int(skill)] not in entry['skills']:
+            if skill not in entry['skills']:
                 print("Incorrect skills! {} wanted but not found".format(skill))
                 print(entry['skills'])
                 return False
@@ -85,6 +88,7 @@ def display_results():
         care_end_24hr = datetime.strptime(entry['end'], '%H%M')
         correct = care_start_24hr < req_start_24hr and req_end_24hr < care_end_24hr
         print("Time: {}".format(correct))
+        print('if {} < {} and {} < {}'.format(care_start_24hr, req_start_24hr, req_end_24hr, care_end_24hr))
         return correct
 
     local_database = [i for i in database if
@@ -92,12 +96,18 @@ def display_results():
                       correct_day(i) and
                       correct_hours(i)]
 
+    print_buffer = [format(i) for i in local_database]
+
+    print(print_buffer)
+    print(skill_list)
+
     return render_template('index.html',
                            # result=local_database,
                            result=[format(i) for i in local_database],
+                           skill_list=skill_list,
                            title='Search Results',
                            dest='/search',
-                           is_hidden="false")
+                           is_hidden=False)
 
 @app.route('/caregiver/<hash>')
 def display_caregiver(hash):

@@ -1,4 +1,3 @@
-
 <html>
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
@@ -23,20 +22,20 @@
                     <label>Start Time (24-hr) *</label>
                 </td>
                 <td>
-                    <input type="number" name="starthour" maxlength="2" min="0" max="23" value="00" required="required">:
+                    <input type="number" name="starthour" maxlength="2" min="0" max="23" value="08" required="required">:
                     <input type="number" name="startmin" maxlength="2" min="0" max="59" value="00" required="required">
                 </td>
                 <td>
                     <label>End Time (24-hr) *</label>
                 </td>
                 <td>
-                    <input name="endhour" type="number" maxlength="2" min="0" max="23" value="00" required="required">:
+                    <input name="endhour" type="number" maxlength="2" min="0" max="23" value="13" required="required">:
                     <input name="endmin" type="number" maxlength="2" min="0" max="59" value="00" required="required">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label>Child's health condition</label>
+                    <label>Requirements</label>
                 </td>
                 <td colspan="5">
                     <select name="skills" multiple="multiple" style="width: 450px;" required="required">
@@ -58,27 +57,29 @@
     </form>
     <br />
 
-    <div class="searchresults" hidden="{{is_hidden}}">
+    {% if is_hidden == False %}
+    <div class="searchresults">
         <table class="searchresults_table" align="center">
-            <tr class="searchresults_table">
+            <tr class="searchresults_table" align="center">
                 <th>Name</th>
                 <th>Price</th>
                 <th>Gender</th>
                 <th>Description</th>
                 <th>Skills</th>
             </tr>
-            {% for item in result: %}
-            <tr class="searchresults_table">
-                <td>${item.name}</td>
-                <td>${item.price}</td>
-                <td>${item.gender}</td>
-                <td>${item.description}</td>
-                <td>${item.skills}</td>
-                {% endfor %}
+            {% for item in result %}
+            <tr class="searchresults_table" align="center">
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.gender}}</td>
+                <td>{{item.description}}</td>
+                <td>
+                  {{', '.join(item.skills)}}
+                </td>
             </tr>
-
+            {% endfor %}
         </table>
-
     </div>
+    {% endif %}
 </body>
 </html>
