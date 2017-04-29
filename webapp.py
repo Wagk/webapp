@@ -11,8 +11,8 @@ import copy
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-# app.static_folder = ''
 database = None
+
 
 @app.route('/')
 @app.route('/index')
