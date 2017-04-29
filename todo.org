@@ -1,0 +1,10 @@
+* Webapp
+* High Concept
+  + schoolbus-like service for working parents, so they can work longer
+    * Use case is for kids undergoing therapy because their sessions aren't
+      long enough to count as childcare
+    * Some therapy services also require the parents of the child to pick up their
+      children in person, which also causes scheduling problems
+  + app would track location of child (?)
+  + app would be responsible for scheduling the pickup/handover of the children
+  + app would arrange locatio
