@@ -1,11 +1,11 @@
 <html>
 <head>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
     <title>{{ title }}</title>
 </head>
 <body>
     <div class="search">
-        <img src="../images/search.png" height="210px" width="700px" />
+        <img src="{{url_for('static', filename='images/search.png')}}" height="210px" width="700px" />
         <h1>I'm looking for a caregiver .... </h1>
     </div>
     <form action="{{dest}}" name="query" method="GET">
@@ -53,7 +53,9 @@
     </form>
     <br />
     <div class="searchresults" hidden="true">
-        test: search results output
+      {% for item in result %}
+      <pre>{{item}}</pre>
+      {% endfor %}
     </div>
 </body>
 </html>
