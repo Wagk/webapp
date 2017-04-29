@@ -14,4 +14,4 @@
   -
 * Things To Do
   - [X] Figure out requests object api
-  - [ ] args to search are not being passed properly. Find out why
+  - [X] args to search are not being passed properly. Find out why
