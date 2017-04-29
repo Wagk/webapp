@@ -4,10 +4,11 @@ body {
     background-repeat: no-repeat;
     background-position: right top;
     background-attachment: fixed;
+    font-family: Calibri, Georgia, Serif;
 }
 
 p {
-    font-family: "Times New Roman", Georgia, Serif;
+    font-family: Calibri, Georgia, Serif;
 }
 
 h1 {
@@ -31,6 +32,10 @@ table {
 tr, td {
     border: solid;
     padding: 5px;
+}
+
+.search {
+    text-align: center;
 }
 
 .searchresults {
