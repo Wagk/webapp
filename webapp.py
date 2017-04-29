@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request, session, redirect
 import json
 import os
+import copy
 
 """
 - Display search queries if user already has preferences saved
@@ -9,9 +10,7 @@ import os
 """
 
 app = Flask(__name__)
-
-flask.secret_key = os.urandom(24)
-
+app.secret_key = os.urandom(24)
 database = None
 
 @app.route('/')
@@ -22,17 +21,39 @@ def index():
     if 'last_query' in request.cookies:
         query = request.cookies['last_query']
 
+        print(query)
+
         redirect(url_for('/search', **query))
         pass
 
     return render_template('index.html',
-                           title='this is a title')
+                           title='this is a title',
+                           dest='/search'
+    )
 
 @app.route('/search')
 def display_results():
-    query = request.args
 
-    # TODO(pangt): Search and accumulate data
+    local_database = database
+
+    for key, value in request.args.items():
+        if key == 'gender':
+            local_database = [i for i in local_database if i['gender'] == value]
+        elif key == 'startdate':
+            local_database = [i for i in local_database if i['startdate'] == value]
+        elif key == 'starthour':
+            local_database = [i for i in local_database if i['starthour'] == value]
+        elif key == 'startmin':
+            local_database = [i for i in local_database if i['startmin'] == value]
+        elif key == 'enddate':
+            local_database = [i for i in local_database if i['enddate'] == value]
+        elif key == 'endhour':
+            local_database = [i for i in local_database if i['endhour'] == value]
+        elif key == 'endmin':
+            local_database = [i for i in local_database if i['endmin'] == value]
+        pass
+
+    # TODO(pangt): format and submit data
 
     return render_template('search.html')
 

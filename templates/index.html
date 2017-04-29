@@ -5,51 +5,52 @@
 </head>
 <body>
     <div class="search">
-        <img src="../images/search.png" height="210px" width="700px"/>
+        <img src="../images/search.png" height="210px" width="700px" />
         <h1>I'm looking for a caregiver .... </h1>
     </div>
+    <form action="{{dest}}" name="query" method="GET">
+        <table align="center">
+            <tr>
+                <td>
+                    Start Date
+                </td>
+                <td>
+                    <input type="date" name="startdate" />
+                </td>
 
-    <table align="center">
-        <tr>
-            <td>
-                Start Date
-            </td>
-            <td>
-                <input type="date" name="startdate" />
-            </td>
+                <td>
+                    Start Time (24-hr)
+                </td>
+                <td>
+                    <input type="number" name="starthour" maxlength="2" min="1" max="24">:
+                    <input type="number" name="startmin" maxlength="2" min="0" max="59"><br>
+                </td>
 
-            <td>
-                Start Time (24-hr)
-            </td>
-            <td>
-                <input type="number" name="starthour" maxlength="2" min="1" max="24">:
-                <input type="number" name="startmin" maxlength="2" min="0" max="59"><br>
-            </td>
+            </tr>
+            <tr>
+                <td width="40%">
+                    Special Needs
+                </td>
+                <td colspan="3">
+                    <select name="skills" multiple="multiple" style="width: 450px;">
+                        <option value="1">Autism Friendly</option>
+                        <option value="2">Disability Friendly</option>
+                        <option value="3">Asthmatic Friendly</option>
+                        <option value="4">Change to whatever that is suitable</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="checkbox" name="meal" />Meal Inclusive</td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="checkbox" name="pickup" />Pick Up</td>
+            </tr>
 
-        </tr>
-        <tr>
-            <td width="40%">
-                Special Needs
-            </td>
-            <td colspan="3">
-                <select name="skills" multiple="multiple" style="width: 450px;">
-                    <option value="1">Autism Friendly</option>
-                    <option value="2">Disability Friendly</option>
-                    <option value="3">Asthmatic Friendly</option>
-                    <option value="4">Change to whatever that is suitable</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4"><input type="checkbox" name="meal"/>Meal Inclusive</td>
-        </tr>
-        <tr>
-            <td colspan="4"><input type="checkbox" name="pickup"/>Pick Up</td>
-        </tr>
-        
-    </table>
-    <br />
-    <div align="center"><input type="submit" align="center" value="Search"></div>
+        </table>
+        <br />
+        <div align="center"><input type="submit" align="center" value="Search"></div>
+    </form>
     <br />
     <div class="searchresults" hidden="true">
         test: search results output
