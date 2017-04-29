@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, session, redirect
 import json
 import os
 import copy
+import datetime
 
 """
 - Display search queries if user already has preferences saved
@@ -12,6 +13,7 @@ import copy
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 database = None
+
 
 @app.route('/')
 @app.route('/index')
@@ -28,7 +30,8 @@ def index():
 
     return render_template('index.html',
                            title='this is a title',
-                           dest='/search'
+                           dest='/search',
+                           is_hidden=True
     )
 
 @app.route('/search')
@@ -36,9 +39,14 @@ def display_results():
 
     local_database = database
 
+    print(request.args.items())
+
     for key, value in request.args.items():
         if key == 'gender':
             local_database = [i for i in local_database if i['gender'] == value]
+        elif key == 'skills':
+            local_database = [i for i in local_database if i['skills'] == value]
+            pass
         elif key == 'startdate':
             local_database = [i for i in local_database if i['startdate'] == value]
         elif key == 'starthour':
@@ -55,7 +63,13 @@ def display_results():
 
     # TODO(pangt): format and submit data
 
-    return render_template('search.html')
+
+    return render_template('index.html',
+                           result=local_database,
+                           title='Search Results',
+                           dest='/search',
+                           is_hidden=False
+    )
 
 @app.route('/caregiver/<hash>')
 def display_caregiver(hash):

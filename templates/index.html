@@ -1,38 +1,45 @@
 <html>
 <head>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
     <title>{{ title }}</title>
 </head>
 <body>
     <div class="search">
-        <img src="../images/search.png" height="210px" width="700px" />
+        <img src="{{url_for('static', filename='images/search.png')}}" height="210px" width="700px" />
         <h1>I'm looking for a caregiver .... </h1>
     </div>
+    <hr />
     <form action="{{dest}}" name="query" method="GET">
         <table align="center">
             <tr>
-                <td>
-                    Start Date
+                <td width="20%">
+                    <label>Date *</label>
                 </td>
                 <td>
-                    <input type="date" name="startdate" />
-                </td>
-
-                <td>
-                    Start Time (24-hr)
-                </td>
-                <td>
-                    <input type="number" name="starthour" maxlength="2" min="1" max="24">:
-                    <input type="number" name="startmin" maxlength="2" min="0" max="59"><br>
+                    <input type="date" name="startdate" required="required"/>
                 </td>
 
+                <td>
+                    <label>Start Time (24-hr) *</label>
+                </td>
+                <td>
+                    <input type="number" name="starthour" maxlength="2" min="0" max="23" required="required">:
+                    <input type="number" name="startmin" maxlength="2" min="0" max="59" required="required">
+                </td>
+                <td>
+                    <label>End Time (24-hr) *</label>
+                </td>
+                <td>
+                    <input name="endhour" type="number" maxlength="2" min="0" max="23" required="required">:
+                    <input name="endmin" type="number" maxlength="2" min="0" max="59" required="required">
+                </td>
             </tr>
             <tr>
-                <td width="40%">
-                    Special Needs
+                <td>
+                    <label>Special Needs</label>
                 </td>
-                <td colspan="3">
-                    <select name="skills" multiple="multiple" style="width: 450px;">
+                <td colspan="5">
+                    <select name="skills" multiple="multiple" style="width: 450px;" required="required">
                         <option value="1">Autism Friendly</option>
                         <option value="2">Disability Friendly</option>
                         <option value="3">Asthmatic Friendly</option>
@@ -41,19 +48,38 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="4"><input type="checkbox" name="meal" />Meal Inclusive</td>
+                <td colspan="6"><input type="checkbox" name="meal" /><label>Meal Inclusive</label></td>
             </tr>
             <tr>
-                <td colspan="4"><input type="checkbox" name="pickup" />Pick Up</td>
+                <td colspan="6"><input type="checkbox" name="pickup" /><label>Pick Up</label></td>
+            </tr>
+        </table>
+        <div align="center"><input type="submit" align="center" value="Search"></div>
+        <hr/>
+    </form>
+    <br />
+
+    <div class="searchresults" hidden="{{is_hidden}}">
+        <table class="searchresults_table" align="center">
+            <tr class="searchresults_table">
+                <th>Name</th>
+                <th>Price</th>
+                <th>Gender</th>
+                <th>Description</th>
+                <th>Skills</th>
+            </tr>
+            {% for item in result: %}
+            <tr class="searchresults_table">
+                <td>${item.name}</td>
+                <td>${item.price}</td>
+                <td>${item.gender}</td>
+                <td>${item.description}</td>
+                <td>${item.skills}</td>
+                {% endfor %}
             </tr>
 
         </table>
-        <br />
-        <div align="center"><input type="submit" align="center" value="Search"></div>
-    </form>
-    <br />
-    <div class="searchresults" hidden="true">
-        test: search results output
+
     </div>
 </body>
 </html>
