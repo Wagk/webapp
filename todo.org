@@ -12,3 +12,6 @@
   - airbnb for daycare
   - some form of chat client for people with autistic kids
   -
+* Things To Do
+  - [ ] Figure out requests object api
+  -
