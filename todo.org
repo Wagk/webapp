@@ -8,3 +8,7 @@
   + app would track location of child (?)
   + app would be responsible for scheduling the pickup/handover of the children
   + app would arrange locatio
+* Brainstorming
+  - airbnb for daycare
+  - some form of chat client for people with autistic kids
+  -
