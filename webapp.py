@@ -16,10 +16,18 @@ database = None
 
 skill_list = []
 
-
 @app.route('/')
 @app.route('/index')
 def index():
+
+    #if the client has previously searched for something
+    if 'last_query' in request.cookies:
+        query = request.cookies['last_query']
+        print(query)
+        redirect(url_for('/search', **query))
+        pass
+
+    print(skill_list)
 
     return render_template('index.html',
                            title='this is a title',
@@ -29,14 +37,6 @@ def index():
 
 @app.route('/search')
 def display_results():
-
-    if 'last_query' in request.cookies:
-        query = request.cookies['last_query']
-    else:
-        query = request.args.to_dict(flat=False)
-        print("printing query")
-        print(query)
-        pass
 
     # grab presentable stuff from database
     def format(entry):
@@ -75,14 +75,7 @@ def display_results():
                       correct_hours(i)]
 
     #format message
-    # text_message = "You have searched for a caregiver on " + request.args.get('startdate') + ", from " + request.args.get('starthour') + ":" + request.args.get('startmin')  + " to " + request.args.get('endhour') + ":" + request.args.get('endmin')
-    text_message = "You have searched for a caregiver on {}, from {} to {}".format(request.args.get('startdate'),
-                                                                                   datetime.strptime('{}:{}'.format(request.args.get('starthour'),
-                                                                                                                    request.args.get('startmin')),
-                                                                                                     '%H%M'),
-                                                                                   datetime.strptime('{}{}'.format(request.args.get('endhour'),
-                                                                                                                   request.args.get('endmin')),
-                                                                                                                               '%H%M'))
+    text_message = "You have searched for a caregiver on " + request.args.get('startdate') + ", from " + request.args.get('starthour') + ":" + request.args.get('startmin')  + " to " + request.args.get('endhour') + ":" + request.args.get('endmin')
 
     resp = make_response(render_template('index.html',
                                          result=[format(i) for i in local_database],
@@ -91,7 +84,7 @@ def display_results():
                                          title='Search Results',
                                          dest='/search',
                                          is_hidden=False))
-    resp.set_cookie('last_query', )
+
     return resp
 
 
@@ -107,7 +100,6 @@ if __name__ == "__main__":
     with open('caregiver_database.json', 'r') as json_file:
         database = json.load(json_file)
 
-        # dynamically populate skills list
         for caretaker in database:
             for skill in caretaker['skills']:
                 if skill not in skill_list:
