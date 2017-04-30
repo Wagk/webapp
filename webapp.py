@@ -76,6 +76,7 @@ def display_results():
 
     #format message
     text_message = "You have searched for a caregiver on " + request.args.get('startdate') + ", from " + request.args.get('starthour') + ":" + request.args.get('startmin')  + " to " + request.args.get('endhour') + ":" + request.args.get('endmin')
+
     resp = make_response(render_template('index.html',
                                          result=[format(i) for i in local_database],
                                          skill_list=skill_list,
