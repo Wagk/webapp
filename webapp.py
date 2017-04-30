@@ -23,11 +23,8 @@ def index():
     #if the client has previously searched for something
     if 'last_query' in request.cookies:
         query = request.cookies['last_query']
-        print(query)
         redirect(url_for('/search', **query))
         pass
-
-    print(skill_list)
 
     return render_template('index.html',
                            title='this is a title',
