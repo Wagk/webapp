@@ -31,8 +31,8 @@ input[type=number]{
     width: 40px;
 }
 
-input[type=number], input, select {
-    font: 12px arial, verdana;
+input[type=number], input[type=date], input, select, option {
+        font: 12px arial, verdana;
 }
 
 label, select {
