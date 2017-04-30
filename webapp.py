@@ -20,14 +20,10 @@ skill_list = []
 @app.route('/index')
 def index():
 
-    first_time = True
-
     #if the client has previously searched for something
     if 'last_query' in request.cookies:
         query = request.cookies['last_query']
-
         print(query)
-
         redirect(url_for('/search', **query))
         pass
 
@@ -85,9 +81,7 @@ def display_results():
                                          dest='/search',
                                          is_hidden=False))
 
-    resp.set_cookie('last_query', request.args)
-
-    return
+    return resp
 
 
 @app.route('/caregiver/<hash>')
