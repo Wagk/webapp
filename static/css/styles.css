@@ -1,9 +1,18 @@
+@font-face {
+    font-family: headerFont;
+    src: url('../css/type/Typewriter Style.otf');
+}
+
+@font-face {
+    font-family: textFont;
+    src: url('../css/type/Exo-Regular.otf');
+}
+
 body {
-    background-color: powderblue;
-    background-image: url("../images/background2.jpg");
-    background-repeat: no-repeat;
-    background-position: right top;
+    background-image: url("../images/background3.jpg");
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     font-family: 12px arial, verdana;
 }
 
@@ -12,7 +21,9 @@ p {
     color: red;
 }
 
-h1 {
+._header {
+    font-family: headerFont;
+    font-size: 40px;
     color: blue;
 }
 
@@ -22,6 +33,11 @@ input[type=number] {
 
 label, select {
     font: bold 12px arial, verdana;
+}
+
+._textmessage {
+    font-family: textFont;
+    color: rosybrown;
 }
 
 table {
@@ -34,25 +50,63 @@ tr, td {
     padding: 5px;
 }
 
-.search {
+.search, .searchresults {
     text-align: center;
 }
 
 .searchresults {
+    margin: 0 auto;
+    padding: 10px;
     align-content: center;
-    text-align: center;
 }
+
 
 .searchresults_table {
-    font: bold 12px arial, verdana;
-    align-content: center;
-    border: groove;
-    width: 80%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    display: table;
 }
 
-.searchresults_table tr:nth-child(odd) {
-    background-color: #dfdfff;
+
+@media screen and (max-width: 580px) {
+    .searchresults_table {
+        display: block;
+    }
 }
 
-.searchresults_table tr:nth-child(even) {
-    background-color: #fafaff;
+.row {
+    display: table-row;
+    background: #f6f6f6;
+}
+
+    .row:nth-of-type(odd) {
+        background: #e9e9e9;
+    }
+
+    .row.header {
+        font-weight: 900;
+        color: #ffffff;
+        background: linear-gradient(#f4b0a9 3%,#ea6153 100%);
+    }
+
+@media screen and (max-width: 580px) {
+    .row {
+        padding: 8px 0;
+        display: block;
+    }
+}
+
+.cell {
+    padding: 6px 12px;
+    display: table-cell;
+}
+
+@media screen and (max-width: 580px) {
+    .cell {
+        padding: 2px 12px;
+        display: block;
+    }
+}
