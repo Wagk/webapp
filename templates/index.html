@@ -6,7 +6,7 @@
 <body>
     <div class="search">
         <img src="{{url_for('static', filename='images/search.png')}}" height="210px" width="700px" />
-        <h1>I'm looking for a caregiver .... </h1>
+        <div class="_header">I'm looking for a caregiver .... </div>
     </div>
     <hr />
     <form action="{{dest}}" name="query" method="GET">
@@ -55,36 +55,33 @@
         <div align="center"><input type="submit" align="center" value="Search"></div>
         <hr/>
     </form>
-    <br />
 
     <script type="text/javascript">
       document.getElementById("date").valueAsDate = new Date();
     </script>
 
     {% if is_hidden == False %}
-    <div class="searchresults">
-        <label>{{text_message}}</label>
-        <table class="searchresults_table" align="center">
-            <tr class="searchresults_table" align="center">
-                <th>Name</th>
-                <th>Price</th>
-                <th>Gender</th>
-                <th>Description</th>
-                <th>Skills</th>
-            </tr>
-            {% for item in result %}
-            <tr class="searchresults_table" align="center">
-                <td>{{item.name}}</td>
-                <td>{{item.price}}</td>
-                <td>{{item.gender}}</td>
-                <td>{{item.description}}</td>
-                <td>
-                  {{', '.join(item.skills)}}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+    <div class="searchresults" align="center">
+        <div class="_textmessage">{{text_message}}</div><br />
+            <div class="searchresults_table">
+                <div class="row header">
+                    <div class="cell">Name</div>
+                    <div class="cell">Price</div>
+                    <div class="cell">Gender</div>
+                    <div class="cell">Description</div>
+                     <div class="cell">Skills</div>
+                </div>
+                {% for item in result %}
+                <div class="row">
+                    <div class="cell"> {{item.name}}</div>
+                        <div class="cell"> {{item.price}}</div>
+                        <div class="cell"> {{item.gender}}</div>
+                        <div class="cell"> {{item.description}}</div>
+                        <div class="cell"> {{', '.join(item.skills)}}</div>
+                    </div>
+                 {% endfor %}
+            </div>
+        </div>
     {% endif %}
 </body>
 </html>
