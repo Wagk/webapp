@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, make_response
 import json
 import os
 import copy
@@ -14,13 +14,13 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 database = None
 
-skill_list = [
-    "Autism Friendly", "Disability Friendly", "Asthmatic Friendly"
-]
+skill_list = []
 
 @app.route('/')
 @app.route('/index')
 def index():
+
+    first_time = True
 
     #if the client has previously searched for something
     if 'last_query' in request.cookies:
@@ -37,13 +37,10 @@ def index():
                            title='this is a title',
                            skill_list=skill_list,
                            dest='/search',
-                           is_hidden=True
-    )
+                           is_hidden=True)
 
 @app.route('/search')
 def display_results():
-
-    print(request.args.items())
 
     # grab presentable stuff from database
     def format(entry):
@@ -54,24 +51,14 @@ def display_results():
     def correct_skills(entry):
         for skill in request.args.getlist('skills'):
             if skill not in entry['skills']:
-                print("Incorrect skills! {} wanted but not found".format(skill))
-                print(entry['skills'])
                 return False
-
-            print("Correct Skills")
             return True
-
-    def correct_gender(entry):
-        correct = entry['gender'] == request.args.get('gender')
-        print("Gender: {}".format(correct))
-        return correct
 
     def correct_day(entry):
         req_date = datetime.strptime(request.args.get('startdate'), '%Y-%m-%d')
         avail_day = int(req_date.strftime('%w'))
-        correct = entry['days'][avail_day] == True
-        print("Day: {}".format(correct))
-        return correct
+        return entry['days'][avail_day] == True
+
 
     def correct_hours(entry):
         req_start_24hr = datetime.strptime('{}{}'.format(request.args.get('starthour'),
@@ -86,28 +73,22 @@ def display_results():
 
         care_start_24hr = datetime.strptime(entry['start'], '%H%M')
         care_end_24hr = datetime.strptime(entry['end'], '%H%M')
-        correct = care_start_24hr < req_start_24hr and req_end_24hr < care_end_24hr
-        print("Time: {}".format(correct))
-        print('if {} < {} and {} < {}'.format(care_start_24hr, req_start_24hr, req_end_24hr, care_end_24hr))
-        return correct
+        return care_start_24hr < req_start_24hr and req_end_24hr < care_end_24hr
 
-    local_database = [i for i in database if
-                      correct_skills(i) and
-                      correct_day(i) and
+    local_database = [i for i in database if correct_skills(i) and correct_day(i) and
                       correct_hours(i)]
 
-    print_buffer = [format(i) for i in local_database]
+    resp = make_response(render_template('index.html',
+                                         result=[format(i) for i in local_database],
+                                         skill_list=skill_list,
+                                         title='Search Results',
+                                         dest='/search',
+                                         is_hidden=False))
 
-    print(print_buffer)
-    print(skill_list)
+    resp.set_cookie('last_query', request.args)
 
-    return render_template('index.html',
-                           # result=local_database,
-                           result=[format(i) for i in local_database],
-                           skill_list=skill_list,
-                           title='Search Results',
-                           dest='/search',
-                           is_hidden=False)
+    return
+
 
 @app.route('/caregiver/<hash>')
 def display_caregiver(hash):
@@ -120,5 +101,13 @@ if __name__ == "__main__":
 
     with open('caregiver_database.json', 'r') as json_file:
         database = json.load(json_file)
+
+        for caretaker in database:
+            for skill in caretaker['skills']:
+                if skill not in skill_list:
+                    skill_list.append(skill)
+                pass
+            pass
+
         app.run(debug=False)
         pass
