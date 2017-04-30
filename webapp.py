@@ -37,7 +37,7 @@ def index():
 
 @app.route('/search')
 def display_results():
-	
+
     # grab presentable stuff from database
     def format(entry):
         return {x : y for x, y in entry.items() if x in [
@@ -73,16 +73,13 @@ def display_results():
 
     local_database = [i for i in database if correct_skills(i) and correct_day(i) and
                       correct_hours(i)]
-	
-	#format message
-    text_message = "You have searched for a caregiver on " + request.args.get('startdate') + ", from " + 
-                   request.args.get('starthour') + ":" + request.args.get('startmin')  + " to " + 
-                   request.args.get('endhour') + ":" + request.args.get('endmin')
-	
-	resp = make_response(render_template('index.html',
+
+    #format message
+    text_message = "You have searched for a caregiver on " + request.args.get('startdate') + ", from " + request.args.get('starthour') + ":" + request.args.get('startmin')  + " to " + request.args.get('endhour') + ":" + request.args.get('endmin')
+    resp = make_response(render_template('index.html',
                                          result=[format(i) for i in local_database],
                                          skill_list=skill_list,
-										 text_message = text_message,
+                                         text_message = text_message,
                                          title='Search Results',
                                          dest='/search',
                                          is_hidden=False))
