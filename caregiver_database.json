@@ -3,7 +3,7 @@
         "name": "John Doe",
         "age": 45,
         "gender": "male",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac ante vel justo tincidunt maximus vitae at nulla. Nullam lobortis lorem augue, vitae placerat lorem facilisis nec. Proin id ullamcorper augue, at ornare ipsum. Mauris quis mollis elit, in imperdiet augue. Praesent ac est quis eros convallis ultrices at vel justo.",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac ante vel justo tincidunt maximus vitae at nulla.  Proin id ullamcorper augue, at ornare ipsum. Mauris quis mollis elit, in imperdiet augue. Praesent ac est quis eros convallis ultrices at vel justo.",
         "price": 1500,
         "skills": [
             "Anxiety Disorders", "ADHD"
@@ -45,7 +45,7 @@
         "name": "Edwin Poon",
         "age": 99,
         "gender": "male",
-        "description": "old",
+        "description": "oldNullam lobortis lorem augue, vitae placerat lorem facilisis nec.",
         "price": 0,
         "skills": [
             "Autism", "Disabilities", "Asthma"
